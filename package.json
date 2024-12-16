@@ -1,0 +1,25 @@
+{
+  "devDependencies": {
+    "tailwindcss": "^3.4.16"
+  },
+  "scripts": {
+    "dev": "npx tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --watch"
+  },
+  "name": "manager_avance",
+  "description": "application de location des voitures",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Youcode-Classe-E-2024-2025/Ahmed_Taoudi-manager.git"
+  },
+  "author": "tawdi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Youcode-Classe-E-2024-2025/Ahmed_Taoudi-manager/issues"
+  },
+  "homepage": "https://github.com/Youcode-Classe-E-2024-2025/Ahmed_Taoudi-manager#readme"
+}
