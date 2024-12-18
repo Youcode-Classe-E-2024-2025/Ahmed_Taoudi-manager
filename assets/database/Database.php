@@ -36,11 +36,11 @@ class Database
         }
     }
 
-    public function query($query)
+    public function query($query,$param = [])
     {
         try {
             $statement = $this->connection->prepare($query);
-            $statement->execute();
+            $statement->execute($param);
             return $statement;
         } catch (PDOException $e) {
 
@@ -48,7 +48,9 @@ class Database
 
         }
     }
-
+public function test(){
+    echo("in database class");
+}
     public function createDatabase($dbname) {
         try {
             
