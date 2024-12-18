@@ -53,7 +53,7 @@ create table if not exists paiements (
     reservation_id INT,
     montant DECIMAL(10, 2) NOT NULL,
     date_paiement DATE NOT NULL,
-   foreign key  (reservation_id)  references reservations(id_reservation)
+   foreign key  (reservation_id)  references reservations(id)
 );
 
 INSERT INTO utilisateur (name, email, mot_pass) VALUES
@@ -64,15 +64,15 @@ INSERT INTO utilisateur (name, email, mot_pass) VALUES
 ('David Lefevre', 'david.lefevre@mail.com', 'password101'),
 ('Eve Durand', 'eve.durand@mail.com', 'password102');
 
-INSERT INTO voiture (marque, modele, prix_par_jour, disponible, image_url) VALUES
-('Tesla', 'Model 3', 120, 1, 'https://example.com/tesla-model3.jpg'),
-('BMW', 'X5', 150, 1, 'https://example.com/bmw-x5.jpg'),
-('Audi', 'A4', 200, 1, 'https://example.com/audi-a4.jpg'),
-('Renault', 'Clio', 50, 0, 'https://example.com/renault-clio.jpg'),
-('Ford', 'Focus', 90 , 1, 'https://example.com/ford-focus.jpg');
+INSERT INTO voiture (marque, modele, prix_par_jour, matricule, disponible, image_url) VALUES
+('Tesla', 'Model 3', 120, 'A1234' , 1, 'https://example.com/tesla-model3.jpg'),
+('BMW', 'X5', 150, 'B23234' , 1, 'https://example.com/bmw-x5.jpg'),
+('Audi', 'A4', 200, 'A11534' , 1, 'https://example.com/audi-a4.jpg'),
+('Renault', 'Clio', 50, 'A3421234' , 0, 'https://example.com/renault-clio.jpg'),
+('Ford', 'Focus', 90 , 'B200234' , 1, 'https://example.com/ford-focus.jpg');
 
-INSERT INTO roles (utilisateur_id) VALUES
-(1);
+INSERT INTO roles (utilisateur_id,nom_role) VALUES
+(1,'admin');
 
 INSERT INTO reservations (utilisateur_id, voiture_id, date_debut, date_fin, statut) VALUES
 (1, 1, '2024-12-10', '2024-12-15', 'confirmed'),
