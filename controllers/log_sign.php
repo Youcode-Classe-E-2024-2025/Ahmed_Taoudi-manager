@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['login'])) {
 
         $useremail = htmlspecialchars($_POST['useremail'], ENT_QUOTES);
-        $password = htmlspecialchars($_POST['password'], ENT_QUOTES);
+        $password = $_POST['password'];
         // validate($useremail,);
         $user = $db->query(
             "select * from utilisateur where email = :email and mot_pass = :password",
@@ -43,7 +43,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     } else if (isset($_POST['signup'])) {
         // dd($_POST);
-        
+        $useremail = htmlspecialchars($_POST['useremail'], ENT_QUOTES);
+        $username = htmlspecialchars($_POST['username'], ENT_QUOTES);
+        $password = $_POST['password'];
+        $emailExists = $db->query("select COUNT(*) from utilisateur where email = :email",['email' => $useremail])->fetchColumn();
+// dd($emailExists);
+if($emailExists > 0){
+    echo "you can not use this email try another one <br>";
+    require("views/signup.view.php");
+}else{
+        $newUser = $db->query("insert into utilisateur (email,name,mot_pass) values (:email, :name , :password)",
+        ['name'=> $username ,'email'=>$useremail ,'password'=>$password ]);
+        $id = $db->query("select id from utilisateur where email = :email",['email' => $useremail])->fetchColumn();
+
+        require("views/login.view.php");
+    }
+// dd($newUser);
     }
 } else if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (isset($_GET['mtd']) && $_GET['mtd'] == 'signup') {
