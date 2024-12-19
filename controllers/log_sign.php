@@ -46,24 +46,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $useremail = htmlspecialchars($_POST['useremail'], ENT_QUOTES);
         $username = htmlspecialchars($_POST['username'], ENT_QUOTES);
         $password = $_POST['password'];
-        $emailExists = $db->query("select COUNT(*) from utilisateur where email = :email",['email' => $useremail])->fetchColumn();
-// dd($emailExists);
-if($emailExists > 0){
-    echo "you can not use this email try another one <br>";
-    require("views/signup.view.php");
-}else{
-        $newUser = $db->query("insert into utilisateur (email,name,mot_pass) values (:email, :name , :password)",
-        ['name'=> $username ,'email'=>$useremail ,'password'=>$password ]);
-        $id = $db->query("select id from utilisateur where email = :email",['email' => $useremail])->fetchColumn();
-
-        require("views/login.view.php");
-    }
-// dd($newUser);
+        $emailExists = $db->query("select COUNT(*) from utilisateur where email = :email", ['email' => $useremail])->fetchColumn();
+        // dd($emailExists);
+        if ($emailExists > 0) {
+            echo "you can not use this email try another one <br>";
+            require("views/signup.view.php");
+        } else {
+            $newUser = $db->query(
+                "insert into utilisateur (email,name,mot_pass) values (:email, :name , :password)",
+                ['name' => $username, 'email' => $useremail, 'password' => $password]
+            );
+            $id = $db->query("select id from utilisateur where email = :email", ['email' => $useremail])->fetchColumn();
+            $db->query("insert into user_status (utilisateur_id) values (:id)",['id'=>$id]);
+            require("views/login.view.php");
+        }
+        // dd($newUser);
     }
 } else if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (isset($_GET['mtd']) && $_GET['mtd'] == 'signup') {
         require("views/signup.view.php");
-    } else {
+    } else if(isset($_GET['mtd']) && $_GET['mtd'] == 'logout') {
+        session_destroy();
+        // dd($_SESSION);
+        header('Location: /connecter');
+    }else{
         require("views/login.view.php");
     }
 }
