@@ -13,10 +13,16 @@ if (isset($_SESSION['userrole']) && $_SESSION['userrole'] == 'admin') {
             // dd($list);
         } else if (isset($_GET['show']) && $_GET['show'] == 'reservations') {
             $partial = 'reservations';
-            $list = $db->query("select * from reservations")->fetchAll(PDO::FETCH_ASSOC);
-            dd($list);
+
+            $list = $db->query(" select  r.id, u.name as user_name, v.image_url as car_image,v.marque as car_marque , v.modele as car_modele,  r.date_debut, r.date_fin,  r.statut    from reservations r left join utilisateur u ON r.utilisateur_id = u.id JOIN voiture v ON r.voiture_id = v.id ");
+
+            // dd($list);
+            // $list = $db->query("select * from reservations")->fetchAll(PDO::FETCH_ASSOC);
         } else if (isset($_GET['show']) && $_GET['show'] == 'users') {
             $partial = 'users';
+            $archived_account = $db->query("select COUNT(*) from user_status where userstatus = 'archived' ")->fetchColumn() ;
+            $active_account = $db->query("select COUNT(*) from user_status where userstatus = 'active' ")->fetchColumn() ;
+            $pending_account = $db->query("select COUNT(*) from user_status where userstatus = 'pending' ")->fetchColumn() ;
 
             $list = $db->query("select u.* , s.userstatus from utilisateur u left join user_status s on u.id = s.utilisateur_id ")->fetchAll(PDO::FETCH_ASSOC);
             // dd($list);
