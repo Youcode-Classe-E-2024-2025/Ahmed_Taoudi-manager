@@ -1,4 +1,49 @@
 <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+
+<div class="mt-4">
+            <div class="flex flex-wrap -mx-6">
+                <div class="w-full px-6 mt-6 sm:w-1/3 ">
+                    <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-sm">
+                        <div class="p-3 bg-yellow-400 bg-opacity-75 rounded-full">
+                            
+                        </div>
+
+                        <div class="mx-5">
+                            <h4 class="text-2xl font-semibold text-gray-700"><?= $pending_account ?></h4>
+                            <div class="text-gray-500">pending account</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full px-6 mt-6 sm:w-1/3  ">
+                    <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-sm">
+                        <div class="p-3 bg-green-400 bg-opacity-75 rounded-full">
+                            
+                        </div>
+
+                        <div class="mx-5">
+                            <h4 class="text-2xl font-semibold text-gray-700"><?= $active_account ?></h4>
+                            <div class="text-gray-500">active account</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full px-6 mt-6 sm:w-1/3 ">
+                    <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-sm">
+                        <div class="p-3 bg-rose-600 bg-opacity-75 rounded-full">
+
+                                
+                        </div>
+
+                        <div class="mx-5">
+                            <h4 class="text-2xl font-semibold text-gray-700"><?= $archived_account ?></h4>
+                            <div class="text-gray-500">archived account</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     <div class="container px-6 py-8 mx-auto">
         <h3 class="text-3xl font-medium text-gray-700">Users</h3>
 
@@ -52,7 +97,11 @@
                                     </td>
                                     <td
                                         class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                        <?php if($user['userstatus'] !== 'active'){ ?> 
+                                        <button type="button" data-id="<?= $user['id'] ?>" data-action="<?= $user['userstatus'] ?>" onclick="openModel(event,'active')" class="bg-indigo-600 text-white rounded py-1 px-3 font-semibold hover:bg-indigo-900">active</button>
+                                        <?php }else{?> 
+                                        <button type="button" data-id="<?= $user['id'] ?>" data-action="<?= $user['userstatus'] ?>" onclick="openModel(event,'archived')" class="bg-rose-500 text-white rounded py-1 px-3 font-semibold hover:bg-rose-700">archive</button>
+                                        <?php }?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
