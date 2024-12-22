@@ -32,13 +32,13 @@
         <img class="p-8 w-full h-72 object-cover  rounded-t-lg" src="<?= $car['image_url'] ?>" alt="<?= $car['marque'] ?> <?= $car['modele'] ?> " />
     </a>
     <div class="px-5 pb-5">
-        <a href="/details?id=<?= $car['id']  ;?>">
+        <div>
             <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white"><?= $car['marque'] ?>  </h5>
             <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white"><?= $car['modele'] ?> </h5>
-        </a>
+</div>
         <div class="flex items-center justify-between">
-            <span class="text-3xl font-bold text-gray-900 dark:text-white"><?= $car['prix_par_jour'] ?></span>
-            <a href="/book" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">book now</a>
+            <span class="text-3xl font-bold text-gray-900 dark:text-white"><?= $car['prix_par_jour']?><span class="text-lg"> DH/day</span></span>
+            <a href="/book?id=<?= $car['id'] ?>" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">book now</a>
         </div>
     </div>
 </div>
@@ -56,3 +56,4 @@
 
 </body>
 
+</html>

@@ -58,7 +58,12 @@
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                       <?php if($reservation['statut'] == 'pending'){ ?> 
+                                        <button type="button" data-id="<?= $reservation['id'] ?>" data-action="<?= $reservation['statut'] ?>" onclick="openModelReservation(event,'cancelled')" class="bg-indigo-600 text-white rounded py-1 px-3 font-semibold hover:bg-indigo-900">cancel</button>
+                                        <button type="button" data-id="<?= $reservation['id'] ?>" data-action="<?= $reservation['statut'] ?>" onclick="openModelReservation(event,'confirmed')" class="bg-rose-500 text-white rounded py-1 px-3 font-semibold hover:bg-rose-700">confirme</button>
+                                      
+                                        <?php }else{?> 
+                                          <?php }?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -69,3 +74,16 @@
         </div>
     </div>
 </main>
+<section id="reservation_message-model" class="hidden absolute h-screen w-screen top-0 left-0 z-50 backdrop-blur bg-[#0000006c] ">
+        <div class="flex justify-center items-center h-full w-full ">
+            <form action="/manage_reservations" method="POST" class="bg-white rounded-lg py-10 px-10 text-center ">
+                <p id="submit_message2">
+                    
+                </p>
+                <input type="hidden" name="selected_id" id="selected_id2"  value="-1">
+                <input type="hidden" name="_action" id="_action2"  value="-1">
+                <button type="button" onclick="closeModel(event)" class="px-4 py-1 rounded text-white bg-red-600 ">Cancel</button>
+                <button type="submit" name="change_reservation_status"  class="px-4 py-1 rounded text-white bg-blue-600 ">Submit</button>
+            </form>
+        </div>
+    </section>
