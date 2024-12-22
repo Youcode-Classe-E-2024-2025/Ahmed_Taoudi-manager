@@ -17,11 +17,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $password = $_POST['password'];
         // validate($useremail,);
         $user = $db->query(
-            "select * from utilisateur where email = :email and mot_pass = :password",
-            ['email' => $useremail, 'password' => $password]
+            "select * from utilisateur where email = :email ",
+            ['email' => $useremail]
         )->fetch(PDO::FETCH_ASSOC);
-        if ($user) {
+        if ($user && password_verify($password, $user['mot_pass'])) {
             // dd($user);
+            // if (password_verify($password, $user['mot_pass'])) 
             $role = $db->query(
                 "select * from roles where utilisateur_id = :id ",
                 ['id' => $user['id']]
@@ -62,9 +63,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "you can not use this email try another one <br>";
             require("views/signup.view.php");
         } else {
+            $hashedPassword = password_hash($password, PASSWORD_BCRYPT); 
             $newUser = $db->query(
                 "insert into utilisateur (email,name,mot_pass) values (:email, :name , :password)",
-                ['name' => $username, 'email' => $useremail, 'password' => $password]
+                ['name' => $username, 'email' => $useremail, 'password' => $hashedPassword ]
             );
             $id = $db->query("select id from utilisateur where email = :email", ['email' => $useremail])->fetchColumn();
             $db->query("insert into user_status (utilisateur_id) values (:id)",['id'=>$id]);

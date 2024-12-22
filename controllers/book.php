@@ -13,6 +13,7 @@ if (isset($_SESSION['userid']) && isset($_SESSION['username'])) {
                 die("CSRF token validation failed. Possible CSRF attack.");
             }
             createReservation($db, $_POST);
+            header('location: /profile ');
         }
         if (isset($_GET['id'])) {
             $car = $db->query("select * from voiture where id = :id", ['id' => $_GET["id"]])->fetch(PDO::FETCH_ASSOC);
@@ -42,4 +43,5 @@ function createReservation($db, $post)
                   'date_debut'=>$date_debut,
                   'date_fin'=>$date_fin
                   ]);
+
 }

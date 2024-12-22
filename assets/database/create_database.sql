@@ -66,7 +66,7 @@ create table if not exists paiements (
 );
 
 INSERT INTO utilisateur (name, email, mot_pass) VALUES
-('admin', 'admin@rento.car', 'adminadmin'),
+('admin', 'admin@rento.car', '$2y$10$uUlbU2wwI649p.ZKCwAlLOTAhJZKp6qSjFugJH8IJ1HxRNI3I0pKC'),
 ('Alice Dupont', 'alice.dupont@mail.com', 'password123'),
 ('Bob Martin', 'bob.martin@mail.com', 'password456'),
 ('Charlie Petit', 'charlie.petit@mail.com', 'password789'),

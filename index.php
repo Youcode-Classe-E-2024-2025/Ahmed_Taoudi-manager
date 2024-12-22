@@ -1,7 +1,8 @@
 <?php
 session_start();
 // $_SESSION['AZE']="ahmed aze";
-
+// $password = 'adminadmin';
+// echo password_hash($password, PASSWORD_BCRYPT); die();
 // CSRF
 if (empty($_SESSION['csrf_token'])) { 
 
@@ -31,6 +32,8 @@ $routes = [
     '/manage_reservations' => 'controllers/admin.book.php',
     '/cars' => 'controllers/cars.php',
     '/book' => 'controllers/book.php',
+    '/profile' => 'controllers/profile.php',
+
 ];
 
 if(array_key_exists($uri,$routes)){
