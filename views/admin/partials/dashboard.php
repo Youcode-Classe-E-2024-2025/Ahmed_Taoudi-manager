@@ -149,7 +149,8 @@
                                     </td>
                                     <td
                                         class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                        <button type="button" data-id="<?= $user['id'] ?>" data-action="<?= $user['userstatus'] ?>" onclick="openModel(event,'active')" class="bg-indigo-600 text-white rounded py-1 px-3 font-semibold hover:bg-indigo-900">active</button>
+                                        <button type="button" data-id="<?= $user['id'] ?>" data-action="<?= $user['userstatus'] ?>" onclick="openModel(event,'archived')" class="bg-rose-500 text-white rounded py-1 px-3 font-semibold hover:bg-rose-700">archive</button>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
