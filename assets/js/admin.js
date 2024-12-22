@@ -11,6 +11,25 @@ window.openModel = function(event,action){
 //  console.log(document.getElementById('selected_id')?.value); 
 
 }
+// openModelAddCar
+window.openModelAddCar = function(event){
+ document.getElementById('add-car-model')?.classList.remove('hidden');
+
+}
+// reservation_message-model
+window.openModelReservation = function(event,action){
+    console.log("open object");
+    console.log(event.target.dataset.id);
+ const   id =event.target.dataset.id;
+ document.getElementById('reservation_message-model')?.classList.remove('hidden');
+//  console.log(document.getElementById('selected_id')?.value);
+ document.getElementById('selected_id2').value = id ;
+ document.getElementById('_action2').value = action ;
+ document.getElementById('submit_message2').innerHTML="are you sure you want to " + action +" this account ?" ;
+ console.log(document.getElementById('submit_message'));
+//  console.log(document.getElementById('selected_id')?.value); 
+
+}
 window.openModelEditCar = function(event){
     let id = event.target.dataset.carid;
 
