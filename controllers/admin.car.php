@@ -7,6 +7,10 @@ if (isset($_SESSION['userrole']) && $_SESSION['userrole'] == 'admin') {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (isset($_POST['submit-edit-car'])) {
             // dd($_POST);
+            // CSRF
+            if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+                die("CSRF token validation failed. Possible CSRF attack.");
+            }
             $disponible = (int) $_POST['disponible'];
             $marque = htmlspecialchars($_POST['marque'], ENT_QUOTES);
             $matricule = htmlspecialchars($_POST['matricule'], ENT_QUOTES);
@@ -30,6 +34,10 @@ if (isset($_SESSION['userrole']) && $_SESSION['userrole'] == 'admin') {
             
         } else if (isset($_POST['submit-add-car'])) {
             // dd($_POST);
+            // CSRF
+            if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+                die("CSRF token validation failed. Possible CSRF attack.");
+            }
             $disponible = (int) $_POST['disponible'];
             $marque = htmlspecialchars($_POST['marque'], ENT_QUOTES);
             $matricule = htmlspecialchars($_POST['matricule'], ENT_QUOTES);

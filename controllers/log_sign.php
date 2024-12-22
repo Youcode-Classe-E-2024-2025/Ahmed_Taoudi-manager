@@ -8,6 +8,11 @@
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['login'])) {
 
+        // CSRF
+        if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+            die("CSRF token validation failed. Possible CSRF attack.");
+        }
+
         $useremail = htmlspecialchars($_POST['useremail'], ENT_QUOTES);
         $password = $_POST['password'];
         // validate($useremail,);
@@ -42,6 +47,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             require("views/login.view.php");
         }
     } else if (isset($_POST['signup'])) {
+
+        // CSRF
+        if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+            die("CSRF token validation failed. Possible CSRF attack.");
+        }
         // dd($_POST);
         $useremail = htmlspecialchars($_POST['useremail'], ENT_QUOTES);
         $username = htmlspecialchars($_POST['username'], ENT_QUOTES);

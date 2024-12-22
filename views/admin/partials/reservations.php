@@ -59,8 +59,8 @@
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
                                        <?php if($reservation['statut'] == 'pending'){ ?> 
-                                        <button type="button" data-id="<?= $reservation['id'] ?>" data-action="<?= $reservation['statut'] ?>" onclick="openModelReservation(event,'cancelled')" class="bg-indigo-600 text-white rounded py-1 px-3 font-semibold hover:bg-indigo-900">cancel</button>
-                                        <button type="button" data-id="<?= $reservation['id'] ?>" data-action="<?= $reservation['statut'] ?>" onclick="openModelReservation(event,'confirmed')" class="bg-rose-500 text-white rounded py-1 px-3 font-semibold hover:bg-rose-700">confirme</button>
+                                        <button type="button" data-id="<?= $reservation['id'] ?>" data-action="<?= $reservation['statut'] ?>" onclick="openModelReservation(event,'cancelled')" class="bg-rose-600 text-white rounded py-1 px-3 font-semibold hover:bg-rose-900">cancel</button>
+                                        <button type="button" data-id="<?= $reservation['id'] ?>" data-action="<?= $reservation['statut'] ?>" onclick="openModelReservation(event,'confirmed')" class="bg-indigo-500 text-white rounded py-1 px-3 font-semibold hover:bg-indigo-700">confirme</button>
                                       
                                         <?php }else{?> 
                                           <?php }?>
@@ -80,6 +80,10 @@
                 <p id="submit_message2">
                     
                 </p>
+
+                <!-- CSRF -->
+                <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+
                 <input type="hidden" name="selected_id" id="selected_id2"  value="-1">
                 <input type="hidden" name="_action" id="_action2"  value="-1">
                 <button type="button" onclick="closeModel(event)" class="px-4 py-1 rounded text-white bg-red-600 ">Cancel</button>

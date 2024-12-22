@@ -123,6 +123,9 @@
                 <label for="image_url" class="block text-gray-700 font-medium">Car Image URL</label>
                 <input type="text" name="image_url" id="image_url" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="<!-- Existing Image URL -->">
             </div>
+            
+            <!-- CSRF -->
+            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
 
             <div class="flex justify-center">
                 <button type="submit" name="submit-edit-car" class="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Update Car Info</button>
@@ -176,6 +179,9 @@
                 <label for="image_url" class="block text-gray-700 font-medium">Car Image URL</label>
                 <input type="url" name="image_url" id="image_url" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="http://....">
             </div>
+
+            <!-- CSRF -->
+            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
 
             <div class="flex justify-center">
                 <button type="submit" name="submit-add-car" class="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">add Car</button>

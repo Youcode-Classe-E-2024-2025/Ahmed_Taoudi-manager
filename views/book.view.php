@@ -50,7 +50,8 @@
         </div>
         <!-- Error message  -->
         <div id="error-message" class="hidden text-red-600 mt-4 text-center"></div>
-
+        <!-- CSRF  -->
+        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
         <!-- Submit Section -->
         <div class="flex justify-center">
             <button type="submit" name="submit-booking" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">

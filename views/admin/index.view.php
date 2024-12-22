@@ -32,7 +32,7 @@
                 <nav class="mt-10">
                     <a class="flex items-center px-6 py-2 mt-4 <?= $partial == 'dashboard' ? " text-gray-100 bg-gray-700 bg-opacity-25 " : " text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 " ?>  " href="?show=dashboard">
 
-                        <span class="mx-3">Dashboard</span>
+                        <span class="mx-3">Dashboard</span> <?php  if($countUserPending>0 || $countResvPending>0){ ?> <span class="rounded-full bg-indigo-500 h-2 w-4 ml-auto"></span> <?php }?>
                     </a>
 
                     <a class="flex items-center px-6 py-2 mt-4 <?= $partial == 'cars' ? " text-gray-100 bg-gray-700 bg-opacity-25 " : " text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 " ?> "
@@ -44,13 +44,13 @@
                     <a class="flex items-center px-6 py-2 mt-4 <?= $partial == 'users' ? " text-gray-100 bg-gray-700 bg-opacity-25 " : " text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 " ?> "
                         href="?show=users">
 
-                        <span class="mx-3">Users</span>
+                        <span class="mx-3">Users</span> <?php  if($countUserPending>0){ ?> <span class="rounded-full bg-indigo-500 h-2 w-4 ml-auto"></span> <?php }?>
                     </a>
 
                     <a class="flex items-center px-6 py-2 mt-4 <?= $partial == 'reservations' ? " text-gray-100 bg-gray-700 bg-opacity-25 " : " text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 " ?> "
                         href="?show=reservations">
 
-                        <span class="mx-3">Reservations</span>
+                        <span class="mx-3">Reservations</span><?php  if($countResvPending>0){ ?> <span class="rounded-full bg-indigo-500 h-2 w-4 ml-auto"></span> <?php }?>
                     </a>
                     <a class="flex items-center px-6 py-2 mt-4  text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100  "
                     href="/connecter?mtd=logout">
@@ -95,6 +95,9 @@
                 <p id="submit_message">
                     
                 </p>
+                <!-- CSRF -->
+                <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+
                 <input type="hidden" name="selected_id" id="selected_id"  value="-1">
                 <input type="hidden" name="_action" id="_action"  value="-1">
                 <button type="button" onclick="closeModel(event)" class="px-4 py-1 rounded text-white bg-red-600 ">Cancel</button>

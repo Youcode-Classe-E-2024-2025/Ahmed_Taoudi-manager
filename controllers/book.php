@@ -8,12 +8,18 @@ if (isset($_SESSION['userid']) && isset($_SESSION['username'])) {
     if (isset($status) && $status == 'active') {
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit-booking'])) {
             // dd($_POST);
+            // CSRF
+            if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+                die("CSRF token validation failed. Possible CSRF attack.");
+            }
             createReservation($db, $_POST);
         }
         if (isset($_GET['id'])) {
             $car = $db->query("select * from voiture where id = :id", ['id' => $_GET["id"]])->fetch(PDO::FETCH_ASSOC);
-            // dd($car);
-            require("views/book.view.php");
+            // dd($car['disponible']); 
+
+                require("views/book.view.php");
+         
         }
     } else if (isset($status)) {
         $message = 'your account is ' . $status . ' for this moment ';

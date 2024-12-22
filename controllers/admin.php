@@ -6,7 +6,9 @@ if (isset($_SESSION['userrole']) && $_SESSION['userrole'] == 'admin') {
 
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $list;
+        $countResvPending = $db->query("select COUNT(*) from reservations where statut = 'pending' ")->fetchColumn() ;
 
+        $countUserPending = $db->query("select COUNT(*) from user_status where userstatus = 'pending' ")->fetchColumn() ;
         if (isset($_GET['show']) && $_GET['show'] == 'cars') {
             $partial = 'cars';
             $list = $db->query("select * from voiture")->fetchAll(PDO::FETCH_ASSOC);
@@ -32,6 +34,9 @@ if (isset($_SESSION['userrole']) && $_SESSION['userrole'] == 'admin') {
            $nbrOrders = $db->query("select sum(p.montant) from reservations r inner join paiements p on r.id = p.reservation_id ")->fetchColumn();
            $nbrCars = $db->query("select COUNT(*) from voiture where disponible = 1 ")->fetchColumn();
             $list = $db->query("select u.* , s.userstatus from utilisateur u left join user_status s on u.id = s.utilisateur_id where s.userstatus = 'pending' ")->fetchAll(PDO::FETCH_ASSOC);
+
+            $list2 = $db->query(" select  r.id, u.name as user_name, v.image_url as car_image,v.marque as car_marque , v.modele as car_modele,  r.date_debut, r.date_fin,  r.statut    from reservations r left join utilisateur u ON r.utilisateur_id = u.id JOIN voiture v ON r.voiture_id = v.id  where r.statut = 'pending' ");
+
         }
     }
 
