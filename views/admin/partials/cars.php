@@ -58,11 +58,11 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                         <span
-                                            class="inline-flex px-2 text-xs font-semibold leading-5 text-blue-800 bg-blue-100 rounded-full"><?= $car['prix_par_jour'].' Dh' ?></span>
+                                            class="inline-flex px-2 text-xs font-semibold leading-5 text-blue-800 bg-blue-100 rounded-full"><?= $car['prix_par_jour'] . ' Dh' ?></span>
                                     </td>
                                     <td
                                         class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                        <button data-carid="<?= $car['id'] ?>" onclick="openModelEditCar(event)" class="text-indigo-600 hover:text-indigo-900">Edit</button>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -74,3 +74,57 @@
         </div>
     </div>
 </main>
+<section id="edit-car-model" class="hidden absolute h-screen w-screen top-0 left-0 z-50 backdrop-blur bg-[#0000006c] ">
+        <<div class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-md">
+        <h2 class="text-2xl font-semibold text-center mb-6">Edit Car Information</h2>
+        
+        <form id="form-edit-car" action="/manage_car" method="POST" >
+            <!-- id -->
+            <input type="hidden" name="id" value="-1">
+            
+            <!-- Marque -->
+            <div class="mb-4">
+                <label for="marque" class="block text-gray-700 font-medium">Car Marque</label>
+                <input type="text" name="marque" id="marque" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"  required>
+            </div>
+            
+            <!-- Modele -->
+            <div class="mb-4">
+                <label for="modele" class="block text-gray-700 font-medium">Car Model</label>
+                <input type="text" name="modele" id="modele" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"  required>
+            </div>
+            
+            <!-- Matricule -->
+            <div class="mb-4">
+                <label for="matricule" class="block text-gray-700 font-medium">Car  Matricule</label>
+                <input type="text" name="matricule" id="matricule" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"  required>
+            </div>
+
+            <!-- Prix par Jour -->
+            <div class="mb-4">
+                <label for="prix_par_jour" class="block text-gray-700 font-medium">Price per Day </label>
+                <input type="number" step="0.01" name="prix_par_jour" id="prix_par_jour" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="<!-- Existing Price -->" required>
+            </div>
+
+            <!-- disponible -->
+            <div class="mb-4">
+                <label for="disponible" class="block text-gray-700 font-medium">Available </label>
+                <select name="disponible" id="disponible" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="1" >Yes</option>
+                    <option value="0" >No</option>
+                </select>
+            </div>
+
+            <!-- Image URL -->
+            <div class="mb-4">
+                <label for="image_url" class="block text-gray-700 font-medium">Car Image URL</label>
+                <input type="text" name="image_url" id="image_url" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="<!-- Existing Image URL -->">
+            </div>
+
+            <div class="flex justify-center">
+                <button type="submit" name="submit-edit-car" class="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Update Car Info</button>
+                <button type="button" onclick="closeModel(event)" class="px-6 mx-3 py-2 bg-red-500 text-white rounded-md hover:bg-red-600" >Cancel</button>
+            </div>
+        </form>
+    </div>
+    </section>
